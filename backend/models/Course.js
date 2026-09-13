@@ -1,1 +1,68 @@
-const mongoose = require('mongoose');\n\nconst courseSchema = new mongoose.Schema(\n  {\n    title: {\n      type: String,\n      required: true,\n      trim: true,\n    },\n    description: {\n      type: String,\n      required: true,\n    },\n    category: {\n      type: String,\n      enum: ['Web Development', 'Programming', 'Data Science', 'Mobile Development', 'DevOps', 'AI/ML'],\n      required: true,\n    },\n    level: {\n      type: String,\n      enum: ['Beginner', 'Intermediate', 'Advanced'],\n      default: 'Beginner',\n    },\n    duration: {\n      type: String,\n      required: true, // e.g., \"30 hours\"\n    },\n    instructor: {\n      type: mongoose.Schema.Types.ObjectId,\n      ref: 'User',\n      required: true,\n    },\n    thumbnail: {\n      type: String,\n      default: null,\n    },\n    rating: {\n      type: Number,\n      default: 0,\n      min: 0,\n      max: 5,\n    },\n    totalStudents: {\n      type: Number,\n      default: 0,\n    },\n    isFree: {\n      type: Boolean,\n      default: true,\n    },\n    tags: [String],\n    lessons: [{\n      type: mongoose.Schema.Types.ObjectId,\n      ref: 'Lesson',\n    }],\n    createdAt: {\n      type: Date,\n      default: Date.now,\n    },\n    updatedAt: {\n      type: Date,\n      default: Date.now,\n    },\n  },\n  { timestamps: true }\n);\n\nmodule.exports = mongoose.model('Course', courseSchema);\n
+const mongoose = require('mongoose');
+
+const courseSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
+      enum: ['Web Development', 'Programming', 'Data Science', 'Mobile Development', 'DevOps', 'AI/ML', 'Backend Development'],
+      required: true,
+    },
+    level: {
+      type: String,
+      enum: ['Beginner', 'Intermediate', 'Advanced'],
+      default: 'Beginner',
+    },
+    duration: {
+      type: String,
+      required: true,
+    },
+    instructor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    thumbnail: {
+      type: String,
+      default: null,
+    },
+    rating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5,
+    },
+    totalStudents: {
+      type: Number,
+      default: 0,
+    },
+    isFree: {
+      type: Boolean,
+      default: true,
+    },
+    tags: [String],
+    lessons: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Lesson',
+    }],
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model('Course', courseSchema);
